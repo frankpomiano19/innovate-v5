@@ -1,0 +1,570 @@
+.modal-open 
+.modal{
+	background-color: rgba(0,0,0,0.6) !important;
+}
+
+.modal-dialog{
+	margin-top: 40px !important;
+	max-width: 500px !important;
+	/*margin: 1.95rem auto !important;*/
+}
+
+.modal-body{
+	padding: 24px 24px 24px !important;
+}
+
+.modal-contenido{
+	background: #ECEFF1 !important;
+	border-radius: 10px !important;
+}
+
+.boton-cerrar-modal{
+	position: absolute !important;
+	top: 10px !important;
+	right: 10px !important;
+	z-index: 250 !important;
+}
+
+.titulo-modal{
+	color: #042 !important;
+	font-size: 20px !important;
+	padding-bottom: 10px !important;
+	font-weight: bold;
+}
+
+.boton-registrarme{
+	border-radius: 10px !important;
+	background-color: #f8f538 !important;
+	border-color: #f8f538 !important;
+	color: #042 !important;
+	padding: 9px 15px !important;
+	font-size: 13px !important;
+	font-weight: bold !important;
+}
+
+.bs-infos {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #dde1ec;
+  padding: 12px 27px 10px 0;
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #222032;
+  padding-left: 10px;
+}
+
+.bs-success {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #2ecc4a;
+  padding: 12px 27px 10px 0;
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: white;
+  padding-left: 10px;
+}
+
+.bs-error {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #f33155;
+  padding: 12px 27px 10px 0;
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: white;
+  padding-left: 10px;
+}
+
+.input_group {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.code{
+	width: 68px !important;
+    height: 60px !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 0;
+    line-height: 1.5;
+    padding-right: 22px !important;
+    padding-left: 8px !important;
+    color: black !important;
+}
+/*********************************************/
+.button .icon{
+    font-size: 28px;
+    color: #fff;
+    margin-right: 10px;
+    display: none;
+}
+.button.checked .icon{
+    display: flex;
+}
+
+
+.bg-primaryd{
+  background-color: #1e662e !important;
+}
+
+.btn-sm-arrow {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 165px;
+  height: 50px;
+  border-radius: 50px !important;
+  padding: 10px 10px 10px 20px;
+}
+
+.btn-sm-arrow p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  padding-right: 17px;
+}
+
+.btn-sm-arrow .ico {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  background-color: rgba(255,255,255,.12);
+  border-radius: 50%;
+}
+
+.btn-radius{
+  border-radius: 20px !important;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.pull-right {
+    float: right!important;
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -0.125em;
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+}
+.sr-only {
+    border: 0;
+    clip: rect(0,0,0,0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.caja_files
+{
+  border: 2px dashed #5B36F2 !important;
+  padding: 40px !important;
+  height: 187px !important;
+  margin: 30px 0 !important;
+  border-radius: 5px !important;
+  color: #5B36F2 !important;
+}
+
+.icon-files
+{
+  font-size: 50px !important;
+}
+
+.text-files
+{
+  margin-top: 10px !important;
+  font-size: 16px !important;
+  color: #5B36F2 !important;
+}
+
+.uploaded-area{
+  max-height: 232px;
+  overflow-y: scroll;
+}
+
+.card-list {
+  margin-bottom: 10px;
+  background: #E9F0FF;
+  list-style: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  /*justify-content: space-between;*/
+}
+
+.addedFile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  word-break: break-all;
+  margin-bottom: 5px;
+  padding: 0 25px 0 25px;
+  height: 30px;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 30px;
+  color: black;
+  background: #ECF4F9 url(../img/file.png) no-repeat 5px center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.removeFile {
+  position: absolute;
+  display: block;
+  width: 16px;
+  height: 16px;
+  top: 8px;
+  right: 10px;
+  background: url(../img/cerrar.png);
+}
+
+.details {
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+}
+
+.name-spam {
+  font-size: 13px;
+}
+
+.peso-spam {
+  font-size: 11px;
+  color: #404040;
+}
+
+.icon-filess{
+  font-size: 30px;
+}
+
+/* Progress Bar */
+.upload-form .ui-progressbar,
+.upload-form .ui-progressbar-value {
+  position: relative;
+  height: 4px;
+  
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+
+.upload-form .ui-progressbar-value {
+  background: #82d344;
+  background: -webkit-linear-gradient(top, #82d344 0%, #51af34 100%);
+  background: -moz-linear-gradient(top, #82d344 0%, #51af34 100%);
+  background: -o-linear-gradient(top, #82d344 0%, #51af34 100%);
+  background: -ms-linear-gradient(top, #82d344 0%, #51af34 100%);
+  background: linear-gradient(top, #82d344 0%, #51af34 100%);
+}
+
+.upload-form .ui-progressbar-value span.progressTooltip {
+  position: absolute;
+  display: block;
+  width: 36px;
+  height: 14px;
+  padding: 5px 0 4px 0;
+  top: 10px;
+  right: -18px;
+
+  font-family: sans-serif;
+  font-weight: bold;
+  line-height: 14px;
+  text-align: center;
+  font-size: 12px;
+  color: #646464;
+
+  background: transparent url(../img/tooltip.png) no-repeat;
+}
+
+.thumbnail 
+{
+  width: 160px;
+  height: 150px;
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: border .2s ease-in-out;
+  -o-transition: border .2s ease-in-out;
+  transition: border .2s ease-in-out;
+}
+
+.badged {
+  display: inline-block;
+  min-width: 10px;
+  padding: 5px 5px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: red;
+  border-radius: 60px;
+}
+
+.stock-counter {
+  opacity: 0.8;
+  position: absolute;
+  margin-top: 3px;
+  left: 148px;
+}
+
+.stilo-marcadores{
+  padding-top: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #eef2f7;
+  color: black;
+}
+
+.right-bar {
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 24px 0 rgba(49,58,70,.1),0 1px 0 0 rgba(49,58,70,.08);
+  box-shadow: 0 0 24px 0 rgba(49,58,70,.1),0 1px 0 0 rgba(49,58,70,.08);
+  display: block;
+  position: fixed;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  width: 280px;
+  z-index: 9999;
+  float: right !important;
+  right: -290px;
+  top: 0;
+  bottom: 0;
+  padding-bottom: 80px;
+}
+
+[data-simplebar] {
+    position: relative;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.simplebar-wrapper {
+    overflow: hidden;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+.simplebar-mask {
+    direction: inherit;
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+}
+
+.simplebar-offset {
+    direction: inherit !important;
+    box-sizing: inherit !important;
+    resize: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.simplebar-content-wrapper {
+    direction: inherit;
+    box-sizing: border-box !important;
+    position: relative;
+    display: block;
+    height: 100%;
+    /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
+    width: auto;
+    overflow: auto;
+    /* Scroll on this element otherwise element can't have a padding applied properly */
+    max-width: 100%;
+    /* Not required for horizontal scroll to trigger */
+    max-height: 100%;
+    /* Needed for vertical scroll to trigger */
+    scrollbar-width: none;
+}
+
+.simplebar-content-wrapper::-webkit-scrollbar,
+.simplebar-hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.simplebar-content:before,
+.simplebar-content:after {
+    content: ' ';
+    display: table;
+}
+
+.simplebar-placeholder {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.simplebar-height-auto-observer-wrapper {
+    box-sizing: inherit !important;
+    height: 100%;
+    width: 100%;
+    max-width: 1px;
+    position: relative;
+    float: left;
+    max-height: 1px;
+    overflow: hidden;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    flex-grow: inherit;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.simplebar-height-auto-observer {
+    box-sizing: inherit;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000%;
+    width: 1000%;
+    min-height: 1px;
+    min-width: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+[data-simplebar].simplebar-dragging .simplebar-content {
+    pointer-events: none;
+    user-select: none;
+}
+
+[data-simplebar].simplebar-dragging .simplebar-track {
+    pointer-events: all;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 5px;
+    min-height: 10px;
+
+    
+}
+
+.simplebar-scrollbar.simplebar-visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0s linear;
+}
+
+.simplebar-track.simplebar-vertical {
+    top: 0;
+    width: 11px;
+
+  
+}
+
+.simplebar-track.simplebar-horizontal {
+    left: 0;
+    height: 11px;
+
+
+}
+
+/* Rtl support */
+[data-simplebar-direction='rtl'] .simplebar-track.simplebar-vertical {
+    right: auto;
+    left: 0;
+}
+
+.hs-dummy-scrollbar-size {
+    direction: rtl;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    height: 500px;
+    width: 500px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.simplebar-hide-scrollbar {
+    position: fixed;
+    left: 0;
+    visibility: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.custom-scroll {
+    height: 100%;
+}
+
+[data-simplebar-lg] {
+    
+}
+
+[data-simplebar-primary] {
+    
+    }
+}

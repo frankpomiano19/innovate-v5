@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+		<head>
+			<meta charset="UTF-8">
+			<meta id="viewport-movil" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+			<title>MAPA</title>
+			<!-- ICON -->
+			<link rel="shortcut icon" href="../view/img/favicon_geobosque.png" />
+
+			
+			<!-- icono -->
+			<link rel="stylesheet" href="">
+			<!-- personalizados -->
+			<link rel="stylesheet" href="assets/css/main.visorB.css">
+			<link rel="stylesheet" href="assets/css/personalizado.css">
+			<!-- iconos fontello -->
+    		<link rel="stylesheet" href="assets/plugins/fontello/css/animation.css"/>
+    		<link rel="stylesheet" href="assets/plugins/fontello/css/iconos.css"/>
+    		<link rel="stylesheet" href="assets/plugins/fontello/css/iconos-codes.css"/>
+    		<link rel="stylesheet" href="assets/plugins/fontello/css/iconos-embedded.css"/>
+    		<!-- CSS CHECKBOX 
+    		<link rel="stylesheet" href="assets/css/checkbox.css"/> -->
+    		
+    		<!-- Load Google Material Icons -->
+			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    		<!-- Se agrega la libreria CSS de leaflet y JS -->
+    		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+			<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+			<!-- GEORASTER -->
+			<script src="https://unpkg.com/georaster@1.5.6/dist/georaster.browser.bundle.min.js"></script>
+			<script src="https://unpkg.com/chroma-js@2.4.2/chroma.js"></script>
+			<script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/v3/webpack/bundle/georaster-layer-for-leaflet.min.js"></script>
+
+    		<!-- leaflet UTM -->
+    		<script src="assets/plugins/leaflet/L.LatLng.UTM.js"></script>
+
+    		<!-- leaflet EASYBUTTON  -->
+    		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+			<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+			<!-- leaflet MiniMap  
+			<script src='https://norkart.github.io/Leaflet-MiniMap/Control.MiniMap.js'></script>
+			<link href='https://norkart.github.io/Leaflet-MiniMap/Control.MiniMap.css' rel='stylesheet' /> -->
+
+			<!-- Leaflet-measure -->
+			<script src="https://ljagis.github.io/leaflet-measure/leaflet-measure.js"></script>
+			<link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+
+			<!-- Leaflet DRAW - CONTROLES -->
+			<link rel="stylesheet" href="assets/plugins/leaflet/leaflet.draw.css"/>
+			<script src="assets/plugins/leaflet/leaflet.draw.js"></script>
+
+			<!-- Leaflet.Coordinates -->
+			<link   rel="stylesheet" href="assets/plugins/leaflet/Leaflet.Coordinates-0.1.5.css"/>
+			<script src="assets/plugins/leaflet/Leaflet.Coordinates-0.1.5.min.js"></script>
+    		<!-- JQUERY -->
+    		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		</head>
+<!-- -->		
+<body id="viewmap" class="open">
+	<div class="wrap-app-map row">
+		<div class="map-wrap">
+		   <div class="map-inner">
+			   <div class="logo-tool-bar">
+			        <div class="top-tool-bar row">
+					   	<div class="wrap-logo">
+					   	    <a href="#">
+					   	    	<img src="assets/img/logo_completo.png" width="139" alt="">
+					   	    </a>
+					   	</div>
+					   	<div  class="items-tool-bar">
+					   		<ul id="main-tool-bar" class="list-tool-bar">
+					   			<li>
+					   				<a href="#" id="button-map-base" data-siblings="#main-tool-bar" class="dropdown-toggle x-active" onclick="toogleElement(this, event, {'target':'.leaflet-control-layers', 'fade': true})" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mapa base">
+					   					<i class="icon-upload"></i>
+					   				</a>
+					   			</li>
+					   			<!-- -->
+					   		</ul>
+					   	</div>
+			   	    </div>
+			   	    <div class="bottom-tool-bar">
+			   	    	<span>DEMO</span>
+			   	    </div>
+
+			   </div>
+			   <!-- abre poppup -->
+			   <a href="#" onclick="new geo.lightbox(this, event)" data-x='{"content":"#popup-options"}' class="button-flyout-menu">
+			   	<i class="icon-menu"></i>
+			   </a>
+			   <!-- fin poppup -->
+
+			   <!-- coordenadas -->
+			   	<div id="divUTM" class="utm_data"></div>
+			   <!-- fin coordenadas -->
+
+			   <!-- CAPAS EXTRAS -->
+			   <div  id="divLeyendasNews" style="position:absolute; left: 5px; max-height:83% !important ; top:100px; z-index:999 !important; background-color:white; padding-bottom:5px;overflow-y: scroll; color: white;" class="share-uploadx leaflet-control leaflet-control-layers-expanded leaflet-default x-active">
+
+			   	<div class="leaflet-panel-layers compact expanded leaflet-control leaflet-control-layers-expanded" aria-haspopup="true">
+   					<strong class="title-module"> Seleccionar los Paisajes </strong>
+
+   					<input id="chk_FORESTAL" class="filled-in" type="checkbox">
+   					Agroforestal
+   					<br>
+   					<input id="chk_BPRIMARIO" class="filled-in" type="checkbox">
+   					Bosque Primario
+   					<br>
+   					<input id="chk_BSECUNDARIO5" class="filled-in" type="checkbox">
+   					Bosque Secundario 5 años
+   					<br>
+   					<input id="chk_BSECUNDARIO10" class="filled-in" type="checkbox">
+   					Bosque Secundario 10 años
+   					<br>
+   					<input id="chk_BSECUNDARIO15" class="filled-in" type="checkbox">
+   					Bosque Secundario 15 años
+   					<br>
+   					<input id="chk_PASTURAM" class="filled-in" type="checkbox">
+   					Pastura Mejorada
+   					<br>
+   					<input id="chk_PASTURAD" class="filled-in" type="checkbox">
+   					Pastura Degradada
+   					<br>
+
+   					<hr>
+
+   					<strong>Imágenes</strong>
+   					<br>
+   					<input id="chk_RGB" class="filled-in" type="checkbox">
+   					RGB
+   					<br>
+   					<input id="chk_NDVI" class="filled-in" type="checkbox">
+   					NDVI
+   					<br>
+   					<input id="chk_DSM" class="filled-in" type="checkbox">
+   					DSM
+   					<br><br>
+
+   				</div>
+			
+				</div>
+				<!-- FIN CAPAS EXTRAS -->
+
+			   <!-- mapa central -->
+			   	<div id="mapID" class="mapa" style="position: inherit;height: 100%;">
+			   		
+			   	</div>
+			   <!-- fin mapa --> 	
+			</div>
+		</div>
+			<!-- pop pup -->
+					<div id="popup-options" class="popup-map">
+						<div class="inner-popup-map">
+							<div class="list-options-menu">
+								<div class="row">
+									<a href="../view/moduloalertas/index.php" class="item-option">
+										<i class="icon-travel"></i>
+										<span>Defina su área de interés</span>
+									</a>
+
+									<a href="../view/moduloalertas/index.php" class="item-option">
+										<i class="icon-documents"></i>
+										<span>Administración de archivos</span>
+									</a>
+									<a href="../view/moduloalertas/index.php" target="_top" class="item-option">
+										<i class="icon-exit"></i>
+										<span>Salir del visor Geobosques</span>
+									</a>
+								</div>
+								<div class="row text-center">
+									<a href="#" class="x-close button-close">Cerrar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			<!-- fin pop pup-->
+	</div>
+	
+
+<!-- scripts -->
+<script src="assets/js/index-mapa.js"></script>
+
+	</body>
+</html>

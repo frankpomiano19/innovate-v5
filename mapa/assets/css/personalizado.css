@@ -1,0 +1,77 @@
+#pestanas {
+   float:left;
+   width:100%;
+   line-height:normal;
+   font-size: 16px;
+   font-weight: bold;
+}
+#pestanas ul {
+   margin:0;
+   padding:0;
+   list-style:none;
+}
+#pestanas li {
+   float:left;
+   margin:0 0 0 3px;
+   padding:0;
+   /*background:url("p-der.gif") no-repeat right top;*/
+   background-color: #97a3ab;
+}
+#pestanas a {
+   display:block;
+   /*background:url("p-izq.gif") no-repeat left top;*/
+   /*background-color: white;*/
+   padding:3px 10px 3px 10px;
+   color: #fff;
+   text-decoration: none;
+}
+#pestanas .activa a{
+   /*background-image:url("p-izq-activo.gif");*/
+    background-color: #efefef;
+    color: black;
+}
+#pestanas .activa{
+   /*background-image:url("p-der-activo.gif");*/
+    background-color: #97a3ab;
+}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+   box-shadow: none !important;
+   }
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+   border: 2px solid rgba(0,0,0,0.2) !important;
+   background-clip: padding-box !important;
+   }
+
+.leaflet-left .leaflet-control {
+  margin-left: 10px !important;
+}
+
+.leaflet-bottom .leaflet-control {
+  margin-bottom: 20px !important;
+}
+
+.leaflet-control-minimap a {
+   background-position: -2px -2px!important;
+}
+
+.widget-code {
+    display: block;
+    height: 18px;
+    left: 6px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 6px;
+    width: 18px;
+}
+
+ .area-tooltip {
+            background: #363636;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: #f8d5e4;
+        }
