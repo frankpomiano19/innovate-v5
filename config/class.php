@@ -304,10 +304,21 @@ class Login extends Db
 
 				$stmt->execute();
 
+				//Llamada al api para autenticacion de usuario por correo.
+				$api = curl_init();
+				$info = array("user" => $user_name, "password" => $clave);
+				$data_json = json_encode($info);
 
+				curl_setopt($api, CURLOPT_URL, 'http://127.0.0.1:6000/send/');
+				curl_setopt($api, CURLOPT_POST, true);
+				curl_setopt($api, CURLOPT_POSTFIELDS, $data_json);
+				curl_setopt($api, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+				curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($api);
+				$decoded = json_decode($response, true);
 
 				$rptas = "3";
-				$msm   = "EL USUARIO FUE REGISTRADO EXITOSAMENTE";
+				$msm   = "EL USUARIO FUE REGISTRADO EXITOSAMENTE\nREVISE SU CORREO PARA ACTIVAR SU CUENTA";
 			} else {
 
 				$rptas = "4";

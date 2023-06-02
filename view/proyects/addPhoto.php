@@ -373,7 +373,7 @@ if (isset($_SESSION['user_email']) && isset($_SESSION['user_login_status']) && i
                     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script> -->
                     <!-- URLS -->
                     <script type="text/javascript">
-                        BASE_URL = "http://localhost/innovate-v5/assets/plugins/chuck/";
+                        BASE_URL = "http://144.22.43.182/assets/plugins/chuck/";
                         PROYECTID = $('#idProyect').val();
                         COUNT_IMG = <?php echo $count_img; ?>;
                     </script>
@@ -447,7 +447,7 @@ if (isset($_SESSION['user_email']) && isset($_SESSION['user_login_status']) && i
                             var token_pro = $('#idProyect').val();
                             //var enlace = ""
                             console.log(token_pro);
-                            api = "http://127.0.0.1:5000/proyect/" + token_pro + "/";
+                            api = "http://144.22.43.182:5000/proyect/" + token_pro + "/";
                             fetch(api, {
                                 method: 'POST',
                                 headers: {
