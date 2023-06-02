@@ -13,9 +13,9 @@ class Db
                 date_default_timezone_set('America/Lima');
                 setlocale(LC_ALL, "es_PE.UTF-8", "es_PE", "esp"); ///definimos el idio de ESPAÑOL-PERU
                 $conn = new PDO(
-                    "mysql:host=" . DB_HOST . ";dbname=" . DB_DATA_BASE . ";port=3307",
+                    "mysql:host=" . DB_HOST . ";dbname=" . DB_DATA_BASE,
                     DB_USER,
-                    "jetix",
+                    DB_PASSWORD,
                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
                 );
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
