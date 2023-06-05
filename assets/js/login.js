@@ -72,7 +72,7 @@ $("document").ready(function () {
                } else if (response.rptas == "4"){
                 swal({
                         title: 'Usuario bloqueado temporalmente',
-                        imageUrl: 'assets/img/iconos/cerca.png',
+                        imageUrl: 'assets/img/iconos/advertencia.png',
                         text: response.msm,
                         showCancelButton: false,
                         confirmButtonColor: '#1e662e',
@@ -83,7 +83,21 @@ $("document").ready(function () {
                       $("#btnLogin").html('Ingresar');
                       $('#btnLogin').attr('disabled',false);//habilitamos el boton
 
-             }    
+             }else if (response.rptas == "5"){
+              swal({
+                      title: 'Usuario no autenticado',
+                      imageUrl: 'assets/img/iconos/advertencia.png',
+                      text: response.msm,
+                      showCancelButton: false,
+                      confirmButtonColor: '#1e662e',
+                      confirmButtonText: 'Intentar nuevamente'
+                    
+                    });
+
+                    $("#btnLogin").html('Ingresar');
+                    $('#btnLogin').attr('disabled',false);//habilitamos el boton
+
+           }   
          },
 
 

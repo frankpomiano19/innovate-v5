@@ -77,6 +77,22 @@ class Login extends Db
 
 	###################### FIN DE FUNCION PARA SELECCIONAR USUARIOS CON DATOS ACTUALIZADOS ###############################
 
+	// ##################################### FUNCION PARA VERIFICAR SI EL USUARIO TIENE CUENTA VERIFICADA ###################
+	// public function VerificarAutenticacion()
+	// {
+	// 	$sql = " select * from users where id_user = ? and verificado = 1";
+	// 	$stmt = $this->dbh->prepare($sql);
+	// 	$stmt->execute(array($_SESSION['id_user']));
+	// 	$num = $stmt->rowCount();
+	// 	$verificado = false;
+	// 	if ($num > 0){
+	// 		$verificado = true;
+	// 	}
+	// 	return $verificado; 
+	// }	
+
+	// ##################################FIN FUNCION PARA VERIFICAR SI EL USUARIO TIENE CUENTA VERIFICADA ###################
+
 	#####################  FUNCION PARA ACCEDER AL SISTEMA ######################################################
 	public function Logueo()
 	{
@@ -137,21 +153,69 @@ class Login extends Db
 
 			//exit;
 		} else {
-			$sql_user = "select num_intentos from users WHERE user_name = ?";
-			$stmt_user = $this->dbh->prepare($sql_user);
-			$stmt_user->execute(array(strtoupper($_POST["user_name"])));
-			$num_intent =  $stmt_user->fetch(PDO::FETCH_ASSOC);
-			$num_intentos = (int) implode($num_intent);
-			if ($num_intentos >= 3) {
-				$sql_desbloq = "select inicio_bloqueo from users WHERE user_name = ?";
-				$stmt_desbloq = $this->dbh->prepare($sql_desbloq);
-				$stmt_desbloq->execute(array(strtoupper($_POST["user_name"])));
-				$row_des = $stmt_desbloq->fetch(PDO::FETCH_ASSOC);
-				$fecha_des = date(implode($row_des));
-				$fecha_actual = date("Y-m-d h:i:s");
-				$tiempo_dif = strtotime($fecha_actual) - strtotime($fecha_des);
-				file_put_contents("C:/Users/HP/Downloads/text.txt", $tiempo_dif);
-				if ($tiempo_dif >= 3600) {
+			//Verificar su el usuario es verificado
+			$sql_verif = "select * from users WHERE user_name  = ? and verificado = 1";
+			$stmt_verif = $this->dbh->prepare($sql_verif);
+			$stmt_verif->execute(array(strtoupper($_POST["user_name"])));
+			$num_user_verif = $stmt_verif->rowCount();
+			if ($num_user_verif == 0) {
+				$rptas = "5";
+				$msm   = "REVISE SU CORREO PARA ACTIVAR SU CUENTA";
+			} else {
+				$sql_user = "select num_intentos from users WHERE user_name = ?";
+				$stmt_user = $this->dbh->prepare($sql_user);
+				$stmt_user->execute(array(strtoupper($_POST["user_name"])));
+				$num_intent =  $stmt_user->fetch(PDO::FETCH_ASSOC);
+				$num_intentos = (int) implode($num_intent);
+				if ($num_intentos >= 3) {
+					$sql_desbloq = "select inicio_bloqueo from users WHERE user_name = ?";
+					$stmt_desbloq = $this->dbh->prepare($sql_desbloq);
+					$stmt_desbloq->execute(array(strtoupper($_POST["user_name"])));
+					$row_des = $stmt_desbloq->fetch(PDO::FETCH_ASSOC);
+					$fecha_des = date(implode($row_des));
+					$fecha_actual = date("Y-m-d h:i:s");
+					$tiempo_dif = strtotime($fecha_actual) - strtotime($fecha_des);
+					file_put_contents("C:/Users/HP/Downloads/text.txt", $tiempo_dif);
+					if ($tiempo_dif >= 3600) {
+						if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+							$p[] = $row;
+						}
+
+						$_SESSION["id_user"] 			= $p[0]["id_user"];
+						$_SESSION["fecha_creacion"] 	= $p[0]["fecha_creacion"];
+						$_SESSION["firstname"] 			= $p[0]["firstname"];
+						$_SESSION["lastname"] 			= $p[0]["lastname"];
+						$_SESSION["user_email"] 		= $p[0]["user_email"];
+						$_SESSION["img_perfil"] 		= $p[0]["img_perfil"];
+						$_SESSION["plataforma_access"] 	= $p[0]["plataforma_access"];
+						$_SESSION["user_login_status"] 	= $p[0]["user_login_status"];
+
+						$query = " insert into log_session values (null, ?, ?, ?, ?); ";
+						$stmt = $this->dbh->prepare($query);
+						$stmt->bindParam(1, $a);
+						$stmt->bindParam(2, $b);
+						$stmt->bindParam(3, $c);
+						$stmt->bindParam(4, $d);
+
+						$a = strip_tags($_SERVER['REMOTE_ADDR']);
+						$b = strip_tags(date("Y-m-d h:i:s"));
+						$c = strip_tags($_SERVER['HTTP_USER_AGENT']);
+						$d = $_SESSION["id_user"];
+						$stmt->execute();
+
+						//Reiniciar el contador de numero de intentos
+						$sql_reiniciar_int = "update users SET num_intentos = 0 WHERE user_name = ?";
+						$stmt_reiniciar_int = $this->dbh->prepare($sql_reiniciar_int);
+						$stmt_reiniciar_int->execute(array(strtoupper($_POST["user_name"])));
+						$stmt_reiniciar_int->execute();
+						//
+						$rptas = "3";
+						$msm   = "EN BREVE TE REDIRIGIREMOS AL SISTEMA";
+					} else {
+						$rptas = "4";
+						$msm   = "ESPERE UNA HORA PARA INTENTARLO NUEVAMENTE";
+					}
+				} else {
 					if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 						$p[] = $row;
 					}
@@ -178,48 +242,10 @@ class Login extends Db
 					$d = $_SESSION["id_user"];
 					$stmt->execute();
 
-					//Reiniciar el contador de numero de intentos
-					$sql_reiniciar_int = "update users SET num_intentos = 0 WHERE user_name = ?";
-					$stmt_reiniciar_int = $this->dbh->prepare($sql_reiniciar_int);
-					$stmt_reiniciar_int->execute(array(strtoupper($_POST["user_name"])));
-					$stmt_reiniciar_int->execute();
 					//
 					$rptas = "3";
 					$msm   = "EN BREVE TE REDIRIGIREMOS AL SISTEMA";
-				} else {
-					$rptas = "4";
-					$msm   = "ESPERE UNA HORA PARA INTENTARLO NUEVAMENTE";
 				}
-			} else {
-				if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-					$p[] = $row;
-				}
-
-				$_SESSION["id_user"] 			= $p[0]["id_user"];
-				$_SESSION["fecha_creacion"] 	= $p[0]["fecha_creacion"];
-				$_SESSION["firstname"] 			= $p[0]["firstname"];
-				$_SESSION["lastname"] 			= $p[0]["lastname"];
-				$_SESSION["user_email"] 		= $p[0]["user_email"];
-				$_SESSION["img_perfil"] 		= $p[0]["img_perfil"];
-				$_SESSION["plataforma_access"] 	= $p[0]["plataforma_access"];
-				$_SESSION["user_login_status"] 	= $p[0]["user_login_status"];
-
-				$query = " insert into log_session values (null, ?, ?, ?, ?); ";
-				$stmt = $this->dbh->prepare($query);
-				$stmt->bindParam(1, $a);
-				$stmt->bindParam(2, $b);
-				$stmt->bindParam(3, $c);
-				$stmt->bindParam(4, $d);
-
-				$a = strip_tags($_SERVER['REMOTE_ADDR']);
-				$b = strip_tags(date("Y-m-d h:i:s"));
-				$c = strip_tags($_SERVER['HTTP_USER_AGENT']);
-				$d = $_SESSION["id_user"];
-				$stmt->execute();
-
-				//
-				$rptas = "3";
-				$msm   = "EN BREVE TE REDIRIGIREMOS AL SISTEMA";
 			}
 		}
 
@@ -229,6 +255,7 @@ class Login extends Db
 		exit;
 	}
 	################################# FIN FUNCION PARA ACCEDER AL SISTEMA ##################################################
+
 
 	############################################  FUNCION PARA REGISTRAR USUARIOS  ######################################
 	public function RegistrarUsuarios()
@@ -304,10 +331,21 @@ class Login extends Db
 
 				$stmt->execute();
 
+				//Llamada al api para autenticacion de usuario por correo.
+				$api = curl_init();
+				$info = array("user" => $user_name, "password" => $clave);
+				$data_json = json_encode($info);
 
+				curl_setopt($api, CURLOPT_URL, 'http://127.0.0.1:6000/send/');
+				curl_setopt($api, CURLOPT_POST, true);
+				curl_setopt($api, CURLOPT_POSTFIELDS, $data_json);
+				curl_setopt($api, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+				curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($api);
+				$decoded = json_decode($response, true);
 
 				$rptas = "3";
-				$msm   = "EL USUARIO FUE REGISTRADO EXITOSAMENTE";
+				$msm   = "EL USUARIO FUE REGISTRADO EXITOSAMENTE\nREVISE SU CORREO PARA ACTIVAR SU CUENTA";
 			} else {
 
 				$rptas = "4";
