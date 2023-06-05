@@ -16,7 +16,7 @@ CORS(app, resources={r"/proyect/*": {"origins": "*"}})
 
 ################################ VARIABLES GLOBALES ########################################
 
-path_base= "/var/www/proyect_innovate/files/"
+path_base= "/mnt/vol1/files/"
 #path_base_developer="C:/xampp/htdocs/innovate-v4/files/"
 #path_base_developer_result="C:/xampp/htdocs/files/"
  

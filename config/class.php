@@ -336,7 +336,7 @@ class Login extends Db
 				$info = array("user" => $user_name, "password" => $clave);
 				$data_json = json_encode($info);
 
-				curl_setopt($api, CURLOPT_URL, 'http://127.0.0.1:6000/send/');
+				curl_setopt($api, CURLOPT_URL, 'http://144.22.43.182:6000/send/');
 				curl_setopt($api, CURLOPT_POST, true);
 				curl_setopt($api, CURLOPT_POSTFIELDS, $data_json);
 				curl_setopt($api, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

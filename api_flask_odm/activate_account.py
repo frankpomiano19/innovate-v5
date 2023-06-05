@@ -27,7 +27,7 @@ def registrar_curso():
         remitente = "kevinmenesesdeveloper@gmail.com"
         destinatario = usuario
         asunto = "Registro en GGreen"
-        enlace = "http://localhost/innovate-v5/verify.php?email="+usuario+"&hash="+password
+        enlace = "http://144.22.43.182/verify.php?email="+usuario+"&hash="+password
         mensaje = """Gracias por registrarte en GGreen Innovate
         Haga clic en el enlace para activar su cuenta:
         
