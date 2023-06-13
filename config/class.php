@@ -242,6 +242,11 @@ class Login extends Db
 					$d = $_SESSION["id_user"];
 					$stmt->execute();
 
+					//Reiniciar el contador de numero de intentos
+					$sql_reiniciar_int = "update users SET num_intentos = 0 WHERE user_name = ?";
+					$stmt_reiniciar_int = $this->dbh->prepare($sql_reiniciar_int);
+					$stmt_reiniciar_int->execute(array(strtoupper($_POST["user_name"])));
+					$stmt_reiniciar_int->execute();
 					//
 					$rptas = "3";
 					$msm   = "EN BREVE TE REDIRIGIREMOS AL SISTEMA";
@@ -336,7 +341,7 @@ class Login extends Db
 				$info = array("user" => $user_name, "password" => $clave);
 				$data_json = json_encode($info);
 
-				curl_setopt($api, CURLOPT_URL, 'http://144.22.43.182:6000/send/');
+				curl_setopt($api, CURLOPT_URL, 'http://144.22.43.182:4500/send/');
 				curl_setopt($api, CURLOPT_POST, true);
 				curl_setopt($api, CURLOPT_POSTFIELDS, $data_json);
 				curl_setopt($api, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

@@ -20,32 +20,47 @@ def prueba():
 
 @app.route('/send/', methods=['POST'])
 def registrar_curso():
-    print(request.json)
+    #print(request.json)
     usuario = request.json["user"]
     password = request.json["password"]
     try:
-        remitente = "kevinmenesesdeveloper@gmail.com"
+        remitente = "confirmacion@geomaticspace.com"
         destinatario = usuario
         asunto = "Registro en GGreen"
         enlace = "http://144.22.43.182/verify.php?email="+usuario+"&hash="+password
-        mensaje = """Gracias por registrarte en GGreen Innovate
-        Haga clic en el enlace para activar su cuenta:
-        
+        mensaje = """Muchas gracias por registrarte en GGreen Innovate
         """
-        mensaje_completo = mensaje+enlace
+        #mensaje_completo = mensaje+enlace
         email = MIMEMultipart()
         email['From'] = "GGreen" +"<"+remitente+">"
         email['To'] = destinatario
         email['Subject'] = asunto
-        email.attach(MIMEText(mensaje_completo, 'plain'))
+        html = """\
+            <html>
+            <head></head>
+            <body>
+                <img src="http://144.22.43.182/assets/img/logos/logo.png">
+                <p>%s<br>
+                
+                Haga clic <a href="%s">aquí</a> para activar su cuenta.
+                </p>
+            </body>
+            </html>
+            """%(mensaje,enlace)
+        
+
+
+        #email.attach(MIMEText(mensaje_completo, 'plain'))
+
+        email.attach(MIMEText(html, 'html'))
         server = smtplib.SMTP('smtp.gmail.com',587)
         server.ehlo()
         #Encriptacion
         server.starttls()
-        server.login('kevinmenesesdeveloper@gmail.com','tttoeuohvwawgkvt')
+        server.login('confirmacion@geomaticspace.com','uoqmmjvyvwojganx')
         server.sendmail(remitente,destinatario,email.as_string())
         server.quit()
-        print("El correo se envió exitosamente")
+        #print("El correo se envió exitosamente")
         return jsonify({'mensaje': "Mensaje enviado.", 'exito': True})
     except Exception as ex:
         return jsonify({'mensaje': "Error al enviar", 'exito': False})

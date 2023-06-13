@@ -24,7 +24,7 @@ path_base= "/mnt/vol1/files/"
 @app.route('/proyect/<token>/', methods=['POST'])
 def transformar(token):
     path_imagenes = path_base+token+'/imagenes'
-    path_results = path_base+token+'/results'
+    path_results = path_imagenes+'/results'
     if(not os.path.exists(path_imagenes)):
         return jsonify({'mensaje': "Ruta no creada." , 'proyecto':token, 'exito': False})
     lista = lista_imagenes(path_imagenes)
@@ -102,7 +102,7 @@ def lista_imagenes(path_carpeta):
 
 @app.route('/enlace/<token>/', methods=['POST'])
 def devolverEnlace(token):
-    path_results = path_base+token+'/results'
+    path_results = path_base+token+'/imagenes/results'
     if(not os.path.exists(path_results)):
         return jsonify({'mensaje': "Ruta no creada." , 'proyecto':token, 'exito': False})
     path_result_for_php = "../files/"+token+"/results/odm_orthophoto/odm_orthophoto.tif"
