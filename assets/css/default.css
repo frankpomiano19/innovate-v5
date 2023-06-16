@@ -186,7 +186,7 @@ body {
 
 
 /*############# loader modal ###########################*/
-#loading-ajax {
+#loading-ajax #loading-ajax-tif{
   background: url(../../assets/img/overlay2.png) repeat;
   background: rgba(0, 0, 0, 0.8);
   left: 0;

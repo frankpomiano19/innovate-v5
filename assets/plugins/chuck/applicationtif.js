@@ -1,16 +1,13 @@
 var idProyecto = PROYECTID;
-//var tamano_file = $('#filelist').html();
 
-//var tamano_file = file.size;
-//console.log(tamano_file);
 
-var datafile = new plupload.Uploader({
+var datafiletif = new plupload.Uploader({
 	runtimes : 'html5,browserplus,flash,silverlight,gears,html4',//browserplus - gears
-	browse_button : 'uploadFile',
-	container: document.getElementById('container'),
+	browse_button : 'uploadFileTif',
+	container: document.getElementById('containertif'),
 	chunk_size: '1mb',
 	unique_names : false,
-	url : BASE_URL + 'upload.php',
+	url : BASE_URL + 'uploadtif.php',
 	max_file_count: 2,
 	prevent_duplicates: true,
 	rename: true,
@@ -19,7 +16,7 @@ var datafile = new plupload.Uploader({
 	filters: [
         	{
             	title: 'Image files',
-            	extensions: 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'
+            	extensions: 'tif,TIF'
         	}
         ],
 	// Flash settings
@@ -29,15 +26,15 @@ var datafile = new plupload.Uploader({
 
 init: {
 		PostInit: function() {
-			document.getElementById('filelist').innerHTML = '';
-			document.getElementById('upload').onclick = function()
+			document.getElementById('filelistTif').innerHTML = '';
+			document.getElementById('uploadTif').onclick = function()
 			{
-				if(datafile.files.length > 0)
+				if(datafiletif.files.length > 0)
 				{
-					$('#loading-ajax').show();
-					$('#upload').hide();
-					$('#uploadFile').hide();
-					datafile.start();
+					$('#loading-ajax-tif').show();
+					$('#uploadTif').hide();
+					$('#uploadFileTif').hide();
+					datafiletif.start();
 					//$('#filelist').remove();
 					return false;
 				}else{
@@ -60,26 +57,26 @@ init: {
 				{
 				//####### verificamos si hay archivos adjuntos ########//
 				var count_files = 0;
-					if(datafile.files.length > 0)
+					if(datafiletif.files.length > 0)
 					{
-						$('#upload').show();
+						$('#uploadTif').show();
 						count_files = up.files.length;
 						//console.log(count_files);
-						$('#cantidad_archivos').html(count_files);
+						$('#cantidad_archivos_tif').html(count_files);
 	        		}
 
-					document.getElementById('filelist').innerHTML += '<div class="addedFile" id="' + file.id + '">' + file.name +' • <b>' + plupload.formatSize(file.size) + '</b><a href="#" id="' + file.id + '" class="removeFile"></a>' + '</div>';
-					$('#etiquetas_imgs').show();
+					document.getElementById('filelistTif').innerHTML += '<div class="addedFileTif" id="' + file.id + '">' + file.name +' • <b>' + plupload.formatSize(file.size) + '</b><a href="#" id="' + file.id + '" class="removeFile"></a>' + '</div>';
+					$('#etiquetas_tif').show();
 					//var tamano_file = file.size;
 					//console.log(tamano_file);
-					//console.log(datafile.total.size);
-					let fileTotal = Math.floor(datafile.total.size / 1000);
+					//console.log(datafiletif.total.size);
+					let fileTotal = Math.floor(datafiletif.total.size / 1000);
 					if(fileTotal < 1024){
 						fileSize = fileTotal + "KB";
 					}else if(fileTotal >= 1024){
 						fileSize = Math.round(fileTotal / 1000) + " MB";
 					}
-					$('#peso_archivos').html(fileSize);
+					$('#peso_archivos_tif').html(fileSize);
 					//console.log(fileTotal);
 					//console.log(fileSize);
 				});
@@ -103,11 +100,11 @@ init: {
 // end of the upload form configuration
 
 // Remove file button //////////////////////////////////////
-$('#filelist').on('click','.removeFile',function(e)
+$('#filelistTif').on('click','.removeFile',function(e)
 {               
-	datafile.removeFile(datafile.getFile(this.id));
+	datafiletif.removeFile(datafiletif.getFile(this.id));
 	//############## ACTUALIZAMOS CUOTA DE PESO ##################//
-	let fileTotal = Math.floor(datafile.total.size / 1000);
+	let fileTotal = Math.floor(datafiletif.total.size / 1000);
 	if(fileTotal < 1024){
 		fileSize = fileTotal + "KB";
 	}else if(fileTotal >= 1024){
@@ -115,46 +112,46 @@ $('#filelist').on('click','.removeFile',function(e)
 	}
 	//############## FIN ACTUALIZAMOS CUOTA DE PESO ##################//
 	$('#'+this.id).remove();
-	if(datafile.files.length > 0)
+	if(datafiletif.files.length > 0)
 	{
-		$('#upload').show();
-		$('#cantidad_archivos').html(datafile.files.length);
-		$('#peso_archivos').html(fileSize);
+		$('#uploadTif').show();
+		$('#cantidad_archivos_tif').html(datafiletif.files.length);
+		$('#peso_archivos_tif').html(fileSize);
     }else{
-    	$('#cantidad_archivos').html(datafile.files.length);
-    	$('#peso_archivos').html(fileSize);
-    	$('#upload').hide();
-    	$('#etiquetas_imgs').hide();
+    	$('#cantidad_archivos_tif').html(datafiletif.files.length);
+    	$('#peso_archivos_tif').html(fileSize);
+    	$('#uploadTif').hide();
+    	$('#etiquetas_tif').hide();
     }
 
 	e.preventDefault();
 });
 
 // Progress bar ////////////////////////////////////////////
-datafile.bind('UploadProgress', function(up, file) 
+datafiletif.bind('UploadProgress', function(up, file) 
 {
-	$('#filelist').hide();
-	$('#loaderPhoto').show();
-	$('#imgSuccess').hide();
-	$('#porcentaje').html(up.total.percent +'%');
+	$('#filelistTif').hide();
+	$('#loaderPhotoTif').show();
+	$('#imgSuccessTif').hide();
+	$('#porcentajeTif').html(up.total.percent +'%');
 				
 	//var progressBarValue = file.percent;
 	var progressBarValue = up.total.percent;
 				
 	if(progressBarValue == 100)
 	{
-		$('#loading-ajax').hide();
-		$('#loaderIcon').hide();
-		$('#imgSuccess').show();
-		$('#textResult').html('Completado con Éxito');
-		$('#porcentaje').html('');
-		$('#etiquetas_imgs').hide();
+		$('#loading-ajax-tif').hide();
+		$('#loaderIconTif').hide();
+		$('#imgSuccessTif').show();
+		$('#textResultTif').html('Completado con Éxito');
+		$('#porcentajeTif').html('');
+		$('#etiquetas_tif').hide();
 		//$('#filelist').html('');
 	}
 });
 
-//datafile.bind('BeforeUpload', function(up, file) {
+//datafiletif.bind('BeforeUpload', function(up, file) {
   //   file.target_name = (new Date).getTime() + '_' + file.name;
 //});
 
-datafile.init();
+datafiletif.init();

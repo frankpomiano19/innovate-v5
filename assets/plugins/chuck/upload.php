@@ -18,10 +18,10 @@ if (isset($_REQUEST['idProyecto'])) {
 	######################### PARAMETROS PRINCIPALES #####################################
 	$id_proyecto  		= intval($_REQUEST['idProyecto']);
 	$ramdon 			= $id_proyecto;
-	$path_target		=  "/mnt/vol1/files/" . $ramdon;
-	$targetDir 			= "/mnt/vol1/files/" . $ramdon . "/imagenes";
-	$finalDir  			= "/mnt/vol1/files/" . $ramdon . "/imagenes";
-	#$resultDir			= "/mnt/vol1/files/" . $ramdon . "/results";
+	$path_target		=  "../../../files/" . $ramdon;
+	$targetDir 			= "../../../files/" . $ramdon . "/imagenes";
+	$finalDir  			= "../../../files/" . $ramdon . "/imagenes";
+	#$resultDir			= "../../../../files/" . $ramdon . "/results";
 	$cleanupTargetDir 	= true; // Eliminar archivos antiguos - antes estaba en false
 	$maxFileAge 		= 5 * 3600; // Temp file age in seconds 5 * 3600 - 60 * 60
 
@@ -54,7 +54,9 @@ if (isset($_REQUEST['idProyecto'])) {
 	###########################################################################################################
 	//Crear carpeta para alojar las imagenes y sus resultados
 	if (!file_exists($targetDir)) {
-		@mkdir($path_target, 0777, true);
+		if (!file_exists($path_target)) {
+			@mkdir($path_target, 0777, true);
+		}
 		@mkdir($targetDir, 0777, true);
 		#@mkdir($resultDir, 0777, true);
 	}
@@ -137,5 +139,5 @@ if (isset($_REQUEST['idProyecto'])) {
 	exit;
 }
 
-$salidaJson = array("respuesta" => $respuesta);
+$salidaJson = array("respuesta" => $respuesta, "insert" => $insert_datos);
 echo json_encode($salidaJson);

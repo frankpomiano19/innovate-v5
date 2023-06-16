@@ -16091,7 +16091,7 @@ div.dataTables_wrapper > div.row > div[class^="col-"]:first-child {
 }
 
 /*############# loader modal ###########################*/
-#loading-ajax {
+#loading-ajax #loading-ajax-tif{
   background: url(../../assets/img/overlay2.png) repeat;
   background: rgba(0, 0, 0, 0.7);
   left: 0;
