@@ -30,7 +30,7 @@ var temp;
 $(document).ready(function(){
     var tok = document.getElementById("idProyect").value;
     console.log(tok);
-    api = "http://127.0.0.1:5000/enlace/"+tok+"/";
+    api = "http://144.22.43.182:5000/enlace/"+tok+"/";
     fetch(api,{
     method:'POST',
     headers:{
