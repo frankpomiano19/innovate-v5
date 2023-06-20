@@ -5,6 +5,7 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 from pyodm import Node, exceptions
 from osgeo import gdal
+#import gdal2tiles
 
 ##################################### COMUNICACIÓN FLASK ###################################
 
@@ -111,6 +112,16 @@ def lista_imagenes(path_carpeta):
 
     return lista
 
+def transformarTileMap(path_results):
+    try:
+        input_file=path_results+"/odm_orthophoto/odm_orthophoto_redux.tif"
+        output_folder=path_results+"/odm_orthophoto/odm_orthophoto_redux"
+        zoom='13-21'
+        #gdal2tiles.generate_tiles(input_file,output_folder, zoom)
+        return "Archivo transformado a TileMap"
+        
+    except Exception as ex:
+        return "Error al transformar"
 
 @app.route('/enlace/<token>/', methods=['POST'])
 def devolverEnlace(token):
@@ -125,6 +136,7 @@ def devolverEnlace(token):
         path_result_for_php = "../files/"+token+"/results/odm_orthophoto/odm_orthophoto.tif"
         path_real = path_results+"/odm_orthophoto/odm_orthophoto.tif"
     return jsonify({'ruta': path_result_for_php ,'rutaalt': path_real,'proyecto':token, 'exito': True})
+
 
 
 @app.route('/prueba/', methods=['GET'])

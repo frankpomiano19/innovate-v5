@@ -19,7 +19,7 @@ def prueba():
     return "<h1>BIENVENIDOS</h1>"
 
 @app.route('/send/', methods=['POST'])
-def registrar_curso():
+def enviar_mensaje():
     #print(request.json)
     usuario = request.json["user"]
     password = request.json["password"]

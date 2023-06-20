@@ -62,7 +62,11 @@ if (isset($_SESSION['user_email']) && isset($_SESSION['user_login_status']) && i
                     include("config/main-header.php");
                     ?>
                     <!-- Left Sidebar End -->
-
+                    <!-- modales -->
+                    <?php
+                    include("modal/comenzar_procesamiento.php");
+                    ?>
+                    <!-- fin modales -->
                     <!-- Load para proceso de subida de imagenes -->
                     <div id="loading-ajax" style="display:none;z-index: 99999;">
 
@@ -274,31 +278,9 @@ if (isset($_SESSION['user_email']) && isset($_SESSION['user_login_status']) && i
                                                                     </div>
                                                                     <!-- -->
                                                                     <div class="col-lg-12 text-center">
-                                                                        <!-- <a href="#" class="btn btn-info btn-rounded" id="token-project">
+                                                                        <a href="#" data-toggle="modal" data-target="#comenzarProceso" data-backdrop="static" data-keyboard="false" class="btn btn-success btn-rounded btn-lg" style="border-radius: 20px !important;">
                                                                             Comenzar procesamiento
-                                                                        </a> -->
-                                                                        <!--Button trigger Modal -->
-                                                                        <button type="button" class="btn btn-info btn-rounded btn-lg" data-toggle="modal" data-target="#myModal">
-                                                                            Comenzar procesamiento
-                                                                        </button>
-                                                                        <!-- Modal -->
-                                                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                        <h4 class="modal-title" id="myModalLabel">Comenzar procesamiento</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        Haga clic en "Comenzar procesamiento" para iniciar el procesamiento de las imágenes. Esto puede tardar un tiempo. ¿Desea continuar?
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                                                                        <button type="button" class="btn btn-primary" data-backdrop="false" id="token-project" data-dismiss="modal">Comenzar procesamiento</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                        </a>
                                                                     </div>
                                                                     <br>
                                                                     <!-- -->
