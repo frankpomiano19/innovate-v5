@@ -1,6 +1,6 @@
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+            osm = L.tileLayer(osmUrl, { maxZoom: 21, attribution: osmAttrib }),
             map = new L.Map('map', { center: new L.LatLng(-12.04318, -77.02824), zoom: 13 }),
             drawnItems = L.featureGroup().addTo(map);
     L.control.layers({
@@ -24,6 +24,31 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
    
 
 var temp;
+
+
+
+$(document).ready(function(){
+    var tok = document.getElementById("idProyect").value;
+    console.log(tok);
+    api = "http://127.0.0.1:5000/enlace/"+tok+"/";
+    fetch(api,{
+    method:'POST',
+    headers:{
+        "Content-Type":"application/json",
+    },
+    body:JSON.stringify()
+
+})
+.then(response=>response.json())
+.then(data=>{
+    console.log(data);
+    console.log(data["ruta"]);
+    if(data["exito"]){
+        mostrarRaster(data["ruta"]);
+    }
+})
+});
+
 
 document.getElementById('ubicacion').addEventListener('change', function (e)
 {
